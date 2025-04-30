@@ -6,62 +6,174 @@
   <title>Invest - WealthSpring</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f7f9fb;
-      padding: 50px;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      padding: 40px 20px;
       text-align: center;
     }
+
     h2 {
-      color: #0a3d62;
+      color: #2d3436;
+      font-size: 28px;
+      margin-bottom: 30px;
     }
-    select, .button {
-      padding: 12px;
+
+    .plans {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 30px 20px;
+      width: 220px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+      border-color: #0984e3;
+    }
+
+    .card.selected {
+      border-color: #0984e3;
+      box-shadow: 0 0 0 3px rgba(9,132,227,0.2);
+    }
+
+    .title {
+      font-weight: bold;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .amount {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    select, .pay-btn {
+      margin-top: 25px;
+      padding: 12px 16px;
       font-size: 16px;
-      margin: 10px;
       border-radius: 8px;
       border: 1px solid #ccc;
     }
-    .button {
+
+    .pay-btn {
       background: #0984e3;
       color: white;
       border: none;
       cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .pay-btn:hover {
+      background: #0c6cc3;
     }
   </style>
 </head>
 <body>
 
-  <h2>Choose Your Investment Plan</h2>
+  <h2>Select Your Investment Plan</h2>
 
-  <label for="currency">Currency:</label><br>
-  <select id="currency">
-    <option value="NGN">Naira (₦)</option>
-    <option value="USD">Dollar ($)</option>
-  </select><br><br>
+  <div class="plans">
+    <!-- Starter Pack -->
+    <div class="card" onclick="selectPlan(10000, 'Starter Pack')">
+      <div class="title">Starter Pack</div>
+      <div class="amount">₦10,000 / $10</div>
+    </div>
 
-  <label for="amount">Investment Amount:</label><br>
-  <select id="amount">
-    <option value="10000">₦10,000 / $10</option>
-    <option value="25000">₦25,000 / $25</option>
-    <option value="50000">₦50,000 / $50</option>
-    <option value="100000">₦100,000 / $100</option>
-  </select><br><br>
+    <!-- Silver -->
+    <div class="card" onclick="selectPlan(25000, 'Silver')">
+      <div class="title">Silver</div>
+      <div class="amount">₦25,000 / $25</div>
+    </div>
 
-  <button class="button" onclick="payWithPaystack()">Invest Now</button>
+    <!-- Gold -->
+    <div class="card" onclick="selectPlan(50000, 'Gold')">
+      <div class="title">Gold</div>
+      <div class="amount">₦50,000 / $50</div>
+    </div>
+
+    <!-- Pro -->
+    <div class="card" onclick="selectPlan(100000, 'Pro')">
+      <div class="title">Pro</div>
+      <div class="amount">₦100,000 / $100</div>
+    </div>
+
+    <!-- Premium -->
+    <div class="card" onclick="selectPlan(52000, 'Premium')">
+      <div class="title">Premium</div>
+      <div class="amount">₦200,000 / $200</div>
+    </div>
+
+    <!-- Business -->
+    <div class="card" onclick="selectPlan(500000, 'Business')">
+      <div class="title">Business</div>
+      <div class="amount">₦500,000 / $500</div>
+    </div>
+
+    <!-- VIP -->
+    <div class="card" onclick="selectPlan(1000000, 'VIP')">
+      <div class="title">VIP</div>
+      <div class="amount">₦1,000,000 / $1,000</div>
+    </div>
+  </div>
+
+  <div style="margin-top: 40px;">
+    <label for="currency">Choose Currency:</label><br>
+    <select id="currency">
+      <option value="NGN">Naira (₦)</option>
+      <option value="USD">Dollar ($)</option>
+    </select><br>
+
+    <button class="pay-btn" onclick="payWithPaystack()">Pay & Invest</button>
+  </div>
 
   <script src="https://js.paystack.co/v1/inline.js"></script>
   <script>
+    let selectedAmount = null;
+    let selectedPlan = null;
+
+    function selectPlan(amount, name) {
+      selectedAmount = amount;
+      selectedPlan = name;
+      document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
+      event.currentTarget.classList.add('selected');
+    }
+
     function payWithPaystack() {
+      if (!selectedAmount || !selectedPlan) {
+        alert("Please select an investment plan first.");
+        return;
+      }
+
       const currency = document.getElementById("currency").value;
-      const amount = parseInt(document.getElementById("amount").value);
-      const email = "investor@example.com"; // You can replace this dynamically
+      const email = "investor@example.com"; // Can be dynamic
 
       const handler = PaystackPop.setup({
-        key: 'pk_live_d0f6605d9e40755f6d1d0d7ce9a9203d370ad6d0', // Your public key
+        key: 'pk_live_d0f6605d9e40755f6d1d0d7ce9a9203d370ad6d0',
         email: email,
-        amount: currency === "NGN" ? amount * 100 : amount * 100, // Both NGN & USD use *100 for kobo/cents
+        amount: selectedAmount * 100,
         currency: currency,
         ref: 'INVEST-' + Math.floor((Math.random() * 1000000000) + 1),
+        metadata: {
+          custom_fields: [
+            {
+              display_name: "Plan",
+              variable_name: "investment_plan",
+              value: selectedPlan
+            }
+          ]
+        },
         callback: function(response) {
           alert('Payment successful! Reference: ' + response.reference);
           window.location.href = "success.html";
