@@ -33,14 +33,11 @@
     p {
       line-height: 1.6;
     }
-    .account-details, .investments, .transactions {
-      margin: 2rem 0;
-    }
     .box {
       background-color: #e0f7fa;
       padding: 1rem;
       border-radius: 10px;
-      margin-bottom: 1.5rem;
+      margin: 1rem 0;
     }
     .button {
       width: 100%;
@@ -52,32 +49,44 @@
       border-radius: 8px;
       cursor: pointer;
     }
+    .referral {
+      background-color: #e8f5e9;
+      padding: 1rem;
+      border-radius: 10px;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
 
   <header>
     <h1>WealthSpring Dashboard</h1>
-    <p>Manage your investments and monitor your progress.</p>
+    <p>Manage your investments and grow your wealth</p>
   </header>
 
   <div class="container">
     <h2>Welcome, [User Name]!</h2>
-    <div class="account-details box">
+    <div class="box">
       <h3>Account Balance</h3>
       <p>Your current balance: ₦[Amount] or $[Amount]</p>
     </div>
 
-    <div class="investments box">
-      <h3>Active Investments</h3>
-      <p>You have no active investments at the moment.</p>
-      <button class="button">Start New Investment</button>
+    <div class="box">
+      <h3>Available Investment Options</h3>
+      <p>Select an investment option and start earning!</p>
+      <button class="button" onclick="window.location.href='invest.html'">Start Investment</button> <!-- Link to investment page -->
     </div>
 
-    <div class="transactions box">
-      <h3>Recent Transactions</h3>
-      <p>No transactions yet.</p>
-      <button class="button">View All Transactions</button>
+    <div class="referral">
+      <h3>Earn with Referrals!</h3>
+      <p>Refer a friend and earn 5% of their first investment.</p>
+      <button class="button" onclick="window.location.href='refer.html'">Share Your Referral Link</button> <!-- Link to referral page -->
+    </div>
+
+    <div class="box">
+      <h3>Upgrade to Premium</h3>
+      <p>Get higher returns and additional benefits by upgrading to Premium. Only ₦[Amount].</p>
+      <button class="button" onclick="window.location.href='premium.html'">Upgrade Now</button> <!-- Link to premium upgrade page -->
     </div>
 
     <div class="footer">
