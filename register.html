@@ -69,23 +69,45 @@
 
   <div class="container">
     <h2>Create Account</h2>
-    <form action="pay.html" method="POST">
-      <input type="text" name="fullname" placeholder="Full Name" required />
-      <input type="email" name="email" placeholder="Email Address" required />
-      <input type="password" name="password" placeholder="Create Password" required />
-      <select name="currency" required>
+    <form id="registerForm">
+      <input type="text" id="fullname" placeholder="Full Name" required />
+      <input type="email" id="email" placeholder="Email Address" required />
+      <input type="password" id="password" placeholder="Create Password" required />
+      <select id="currency" required>
         <option value="">Select Currency</option>
         <option value="naira">₦ Naira</option>
         <option value="usd">$ USD</option>
       </select>
       <button type="submit">Continue</button>
-      <a href="pay.html">
     </form>
     <div class="login-link">
       Already have an account? <a href="login.html">Login here</a>
     </div>
   </div>
 
+  <script>
+    // Handle form submission
+    document.getElementById("registerForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent the default form submission
+
+      // Capture form data
+      const fullname = document.getElementById("fullname").value;
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const currency = document.getElementById("currency").value;
+
+      // Store data to localStorage (or send it to your backend)
+      localStorage.setItem("userFullname", fullname);
+      localStorage.setItem("userEmail", email);
+      localStorage.setItem("userPassword", password);
+      localStorage.setItem("userCurrency", currency);
+
+      // Redirect to the activation (pay) page
+      window.location.href = "pay.html";
+    });
+  </script>
+
 </body>
 </html>
+
 
