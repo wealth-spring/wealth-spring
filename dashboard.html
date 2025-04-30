@@ -92,6 +92,7 @@
   </div>
 
   <div class="container">
+    <!-- Investment Plan Section -->
     <div class="section">
       <h2>Your Investment Plan</h2>
       <div class="info-box">
@@ -101,6 +102,7 @@
       </div>
     </div>
 
+    <!-- Daily Bonus Section -->
     <div class="section bonus">
       <h2>🎁 Daily Login Bonus</h2>
       <p>Claim $0.50 daily. Accumulates every Friday to your balance.</p>
@@ -108,6 +110,7 @@
       <p id="claimMsg" style="margin-top: 10px; color: green;"></p>
     </div>
 
+    <!-- Referrals Section -->
     <div class="section referrals">
       <h2>Referral Stats</h2>
       <p><strong>Total Referrals:</strong> <span id="refCount">8</span></p>
@@ -116,6 +119,12 @@
   </div>
 
   <script>
+    // Check if user is activated
+    if (localStorage.getItem("isActivated") !== "true") {
+      // Redirect to activation page if not activated
+      window.location.href = "pay.html";
+    }
+
     // Simulated example — this would normally be from a database
     let claimedToday = localStorage.getItem("dailyBonusClaimed");
 
@@ -126,6 +135,7 @@
         return;
       }
 
+      // Save the bonus claim status
       localStorage.setItem("dailyBonusClaimed", today);
       document.getElementById("claimMsg").innerText = "Bonus claimed! $0.50 will be added this Friday.";
       document.getElementById("claimBtn").disabled = true;
