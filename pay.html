@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Activate Account - WealthSpring</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f5f7fb;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(90deg, #007cf0, #00dfd8);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    .container {
+      max-width: 500px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    h2 {
+      text-align: center;
+      color: #007cf0;
+    }
+    p {
+      line-height: 1.6;
+    }
+    .highlight {
+      background-color: #e0f7fa;
+      padding: 1rem;
+      border-radius: 10px;
+      margin: 1rem 0;
+      font-weight: bold;
+    }
+    .payment-button {
+      width: 100%;
+      padding: 0.9rem;
+      background-color: #00b2ff;
+      color: white;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>WealthSpring</h1>
+    <p>Activate your account to start investing</p>
+  </header>
+
+  <div class="container">
+    <h2>Account Activation</h2>
+    <p>Thank you for registering! To activate your WealthSpring account and gain access to our investment dashboard, please make a one-time activation payment.</p>
+
+    <div class="highlight" id="payment-amount">
+      Activation Fee: ₦1,500 or $5 (one-time)
+    </div>
+
+    <p>Kindly proceed with the payment through one of the following options:</p>
+    
+    <!-- Replace with actual Payment Gateway Integration buttons -->
+    <button class="payment-button" onclick="startPayment('naira')">Pay ₦1,500 via Paystack</button>
+    <button class="payment-button" onclick="startPayment('usd')">Pay $5 via PayPal</button>
+
+    <p>After payment, your account will be automatically activated. You will be redirected to the dashboard shortly.</p>
+  </div>
+
+  <div class="footer">
+    <p>If you face any issues, contact support@wealthspring.com</p>
+  </div>
+
+  <script>
+    function startPayment(currency) {
+      // Call Payment Gateway API (Paystack, PayPal, etc.)
+      // Here you would integrate with the API (Paystack, PayPal)
+      alert(`Redirecting to ${currency === 'naira' ? 'Paystack' : 'PayPal'} for payment...`);
+      // You would handle the payment gateway callback on successful payment to confirm and activate the account.
+    }
+  </script>
+
+</body>
+</html>
