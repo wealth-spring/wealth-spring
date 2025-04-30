@@ -3,63 +3,117 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Payment - WealthSpring</title>
+  <title>Activate Account - WealthSpring</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f7f9fb;
-      padding: 50px;
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f5f7fb;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(90deg, #007cf0, #00dfd8);
+      color: white;
+      padding: 2rem;
       text-align: center;
     }
+    .container {
+      max-width: 500px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
     h2 {
-      color: #0a3d62;
+      text-align: center;
+      color: #007cf0;
     }
-    .button {
-      background: #0984e3;
+    p {
+      line-height: 1.6;
+    }
+    .highlight {
+      background-color: #e0f7fa;
+      padding: 1rem;
+      border-radius: 10px;
+      margin: 1rem 0;
+      font-weight: bold;
+    }
+    .payment-button {
+      width: 100%;
+      padding: 0.9rem;
+      background-color: #00b2ff;
       color: white;
-      padding: 15px 30px;
+      font-size: 1rem;
       border: none;
-      font-size: 18px;
-      cursor: pointer;
       border-radius: 8px;
+      cursor: pointer;
+      margin-top: 1rem;
     }
-    .button:hover {
-      background: #065ea9;
+    .footer {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #888;
     }
   </style>
 </head>
 <body>
 
-  <h2>Make Payment for Your Investment</h2>
-  <p>Click the button below to securely pay and start investing.</p>
+  <header>
+    <h1>WealthSpring</h1>
+    <p>Activate your account to start investing</p>
+  </header>
 
-  <!-- Options to choose amount -->
-  <div>
-    <button class="button" onclick="payWithPaystack(1000000, 'NGN')">Invest ₦10,000</button>
-    <button class="button" onclick="payWithPaystack(5000000, 'NGN')">Invest ₦50,000</button>
-    <button class="button" onclick="payWithPaystack(10000000, 'NGN')">Invest ₦100,000</button>
-    <button class="button" onclick="payWithPaystack(5000000, 'USD')">Invest $500</button>
-    <button class="button" onclick="payWithPaystack(10000000, 'USD')">Invest $1000</button>
+  <div class="container">
+    <h2>Account Activation</h2>
+    <p>Thank you for registering! To activate your WealthSpring account and gain access to our investment dashboard, please make a one-time activation payment.</p>
+
+    <div class="highlight" id="payment-amount">
+      Activation Fee: ₦1,500 or $5 (one-time)
+    </div>
+
+    <p>Kindly proceed with the payment through one of the following options:</p>
+    
+    <!-- Paystack Naira Button -->
+    <button class="payment-button" onclick="startPayment('naira')">Pay ₦1,500 via Paystack</button>
+    
+    <!-- Placeholder for PayPal Button, you can implement PayPal separately -->
+    <button class="payment-button" onclick="startPayment('usd')">Pay $5 via PayPal</button>
+
+    <p>After payment, your account will be automatically activated. You will be redirected to the dashboard shortly.</p>
+  </div>
+
+  <div class="footer">
+    <p>If you face any issues, contact support@wealthspring.com</p>
   </div>
 
   <script src="https://js.paystack.co/v1/inline.js"></script>
   <script>
-    function payWithPaystack(amount, currency) {
-      var handler = PaystackPop.setup({
-        key: 'pk_live_d0f6605d9e40755f6d1d0d7ce9a9203d370ad6d0', // 🔁 Replace with your actual LIVE key
-        email: 'gainflow31@@gmail.com',   // Replace with dynamic email later
-        amount: amount,                   // Amount to be paid (in kobo for Naira or cents for USD)
-        currency: currency,               // Currency type: NGN or USD
-        ref: 'INVEST-' + Math.floor((Math.random() * 1000000000) + 1), // Unique reference for the transaction
-        callback: function(response) {
-          alert('Payment Successful! Reference: ' + response.reference);
-          window.location.href = 'success.html?plan=' + currency + '&ref=' + response.reference; // Redirect to success page
-        },
-        onClose: function() {
-          alert('Payment cancelled.');
-        }
-      });
-      handler.openIframe();
+    function startPayment(currency) {
+      if (currency === 'naira') {
+        // Paystack payment process for Naira
+        var handler = PaystackPop.setup({
+          key: 'pk_live_d0f6605d9e40755f6d1d0d7ce9a9203d370ad6d0', // Replace with your actual Paystack key
+          email: 'user@example.com',   // Replace with dynamic user email
+          amount: 150000,              // ₦1,500 (in Kobo)
+          currency: 'NGN',
+          ref: 'ACTIVATE-' + Math.floor((Math.random() * 1000000000) + 1), // Unique reference
+          callback: function(response) {
+            alert('Payment Successful! Reference: ' + response.reference);
+            window.location.href = 'success.html?plan=activation&ref=' + response.reference; // Redirect to success page
+          },
+          onClose: function() {
+            alert('Payment cancelled.');
+          }
+        });
+        handler.openIframe();
+      } else if (currency === 'usd') {
+        // Placeholder for PayPal Payment (Can be implemented separately)
+        alert('Redirecting to PayPal for payment...');
+        // Add PayPal integration here when ready.
+      }
     }
   </script>
 
