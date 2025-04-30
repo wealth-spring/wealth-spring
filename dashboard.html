@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - WealthSpring</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f5f7fb;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(90deg, #007cf0, #00dfd8);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    h2 {
+      text-align: center;
+      color: #007cf0;
+    }
+    p {
+      line-height: 1.6;
+    }
+    .account-details, .investments, .transactions {
+      margin: 2rem 0;
+    }
+    .box {
+      background-color: #e0f7fa;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+    }
+    .button {
+      width: 100%;
+      padding: 0.9rem;
+      background-color: #00b2ff;
+      color: white;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>WealthSpring Dashboard</h1>
+    <p>Manage your investments and monitor your progress.</p>
+  </header>
+
+  <div class="container">
+    <h2>Welcome, [User Name]!</h2>
+    <div class="account-details box">
+      <h3>Account Balance</h3>
+      <p>Your current balance: ₦[Amount] or $[Amount]</p>
+    </div>
+
+    <div class="investments box">
+      <h3>Active Investments</h3>
+      <p>You have no active investments at the moment.</p>
+      <button class="button">Start New Investment</button>
+    </div>
+
+    <div class="transactions box">
+      <h3>Recent Transactions</h3>
+      <p>No transactions yet.</p>
+      <button class="button">View All Transactions</button>
+    </div>
+
+    <div class="footer">
+      <button class="button" onclick="window.location.href='logout.html'">Logout</button>
+    </div>
+  </div>
+
+</body>
+</html>
