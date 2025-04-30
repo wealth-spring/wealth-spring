@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WealthSpring - Grow Your Money</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f5f7fb;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(90deg, #007cf0, #00dfd8);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0.5rem 0;
+    }
+    header p {
+      font-size: 1.1rem;
+    }
+    .currency-switch {
+      text-align: center;
+      margin-top: 1rem;
+    }
+    .currency-switch select {
+      padding: 0.5rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    .cta {
+      background: #fff;
+      padding: 1rem;
+      margin: 2rem auto;
+      text-align: center;
+    }
+    .cta a {
+      background: #007cf0;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+    .section {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .section h2 {
+      text-align: center;
+      color: #007cf0;
+    }
+    .steps {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin-top: 1.5rem;
+    }
+    .step {
+      background: white;
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      width: 300px;
+      margin: 1rem;
+    }
+    .step h3 {
+      margin-top: 0;
+      color: #00b2ff;
+    }
+    .stats, .testimonials, .calculator, .referral {
+      text-align: center;
+      margin-top: 3rem;
+    }
+    .stat-box {
+      background: white;
+      padding: 1rem;
+      margin: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      display: inline-block;
+      width: 200px;
+    }
+    footer {
+      background: #007cf0;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 3rem;
+    }
+    input[type="number"] {
+      padding: 0.5rem;
+      width: 120px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin: 0.5rem;
+    }
+    button {
+      padding: 0.6rem 1.2rem;
+      background-color: #00b2ff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>WealthSpring</h1>
+    <p>Join Nigeria's most trusted digital savings & investment pool. Start growing your money today!</p>
+  </header>
+
+  <div class="currency-switch">
+    <label for="currency">Currency:</label>
+    <select id="currency" onchange="switchCurrency()">
+      <option value="naira" selected>₦ Naira</option>
+      <option value="usd">$ USD</option>
+    </select>
+  </div>
+
+  <div class="cta">
+    <a href="register.html">💼 Join Now - It's Free</a>
+  </div>
+
+  <div class="section">
+    <h2>How It Works</h2>
+    <div class="steps">
+      <div class="step">
+        <h3>1. Join for Free</h3>
+        <p>Create your free account and access your dashboard instantly.</p>
+      </div>
+      <div class="step">
+        <h3>2. Contribute</h3>
+        <p>Deposit from ₦500 or $1 and enter our weekly investment pool with fixed ROI.</p>
+      </div>
+      <div class="step">
+        <h3>3. Earn & Withdraw</h3>
+        <p>Receive returns after 7 days. Withdraw directly or reinvest for more.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section stats">
+    <h2>📊 Live Stats</h2>
+    <div class="stat-box">
+      <h3 id="totalPaid">₦824,000+</h3>
+      <p>Total Paid Out</p>
+    </div>
+    <div class="stat-box">
+      <h3>1,280</h3>
+      <p>Active Users</p>
+    </div>
+    <div class="stat-box">
+      <h3 id="avgEarn">₦9,200</h3>
+      <p>Avg. Weekly Earning</p>
+    </div>
+  </div>
+
+  <div class="section calculator">
+    <h2>💰 Earnings Calculator</h2>
+    <p>Enter an amount to see your expected return in 7 days:</p>
+    <input type="number" id="amount" placeholder="₦500 or $1+" />
+    <button onclick="calculateReturn()">Calculate</button>
+    <p id="result" style="margin-top:1rem; font-weight: bold;"></p>
+  </div>
+
+  <div class="section referral">
+    <h2>🎉 Referral Bonus</h2>
+    <p>Share your unique link & earn <strong>₦500</strong> or <strong>$0.50</strong> per verified referral!</p>
+  </div>
+
+  <div class="section testimonials">
+    <h2>💬 What Our Users Say</h2>
+    <p>“WealthSpring changed the way I save — I now earn weekly returns!” – Chika A.</p>
+    <p>“Fast payouts and transparent system. Highly recommend!” – Emeka T.</p>
+  </div>
+
+  <footer>
+    &copy; 2025 WealthSpring. All rights reserved.
+  </footer>
+
+  <script>
+    let currency = 'naira';
+    const rate = 1300; // 1 USD = 1300 NGN
+
+    function switchCurrency() {
+      currency = document.getElementById("currency").value;
+      updateDisplay();
+    }
+
+    function updateDisplay() {
+      if (currency === 'naira') {
+        document.getElementById("totalPaid").textContent = "₦824,000+";
+        document.getElementById("avgEarn").textContent = "₦9,200";
+        document.getElementById("amount").placeholder = "₦500 or more";
+      } else {
+        document.getElementById("totalPaid").textContent = "$634+";
+        document.getElementById("avgEarn").textContent = "$7.08";
+        document.getElementById("amount").placeholder = "$1 or more";
+      }
+      calculateReturn();
+    }
+
+    function calculateReturn() {
+      let amt = parseFloat(document.getElementById("amount").value);
+      if (isNaN(amt) || amt < (currency === 'naira' ? 500 : 1)) {
+        document.getElementById("result").textContent = currency === 'naira' ?
+          "Enter ₦500 or more." : "Enter $1 or more.";
+        return;
+      }
+
+      let roi = amt * 1.15;
+      let symbol = currency === 'naira' ? "₦" : "$";
+      document.getElementById("result").textContent = 
+        `You’ll earn ${symbol}${roi.toFixed(2)} after 7 days.`;
+    }
+  </script>
+
+</body>
+</html>
