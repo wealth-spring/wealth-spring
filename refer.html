@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Referral Program - WealthSpring</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f5f7fb;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(90deg, #007cf0, #00dfd8);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    h2 {
+      text-align: center;
+      color: #007cf0;
+    }
+    .referral-info {
+      background-color: #e0f7fa;
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin: 1rem 0;
+      text-align: center;
+    }
+    .button {
+      width: 100%;
+      padding: 0.9rem;
+      background-color: #00b2ff;
+      color: white;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Referral Program</h1>
+    <p>Earn commissions by referring friends to WealthSpring</p>
+  </header>
+
+  <div class="container">
+    <h2>Your Referral Link</h2>
+
+    <div class="referral-info">
+      <p>Share your referral link with friends:</p>
+      <input type="text" value="https://wealthspring.com/referral?code=USER1234" readonly>
+      <button class="button" onclick="copyReferralLink()">Copy Link</button>
+    </div>
+
+    <h3>Your Earnings</h3>
+    <p>You’ve earned ₦500 or $1.25 from referrals!</p>
+  </div>
+
+  <div class="footer">
+    <button class="button" onclick="window.location.href='dashboard.html'">Back to Dashboard</button>
+  </div>
+
+  <script>
+    function copyReferralLink() {
+      var copyText = document.querySelector('input');
+      copyText.select();
+      document.execCommand('copy');
+      alert('Referral link copied to clipboard!');
+    }
+  </script>
+
+</body>
+</html>
